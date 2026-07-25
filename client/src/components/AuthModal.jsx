@@ -10,6 +10,10 @@ export default function AuthModal({ authReasonMessage, onClose, onAuthSuccess })
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
 
+  const displayNotice = typeof authReasonMessage === 'string' && authReasonMessage.trim() 
+    ? authReasonMessage 
+    : (isLogin ? 'Log in to manage your experience bookings' : 'Join HobbyHub to discover and host experiences');
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrorMsg('');
@@ -92,7 +96,7 @@ export default function AuthModal({ authReasonMessage, onClose, onAuthSuccess })
             {isLogin ? 'Welcome Back' : 'Create an Account'}
           </h2>
           <p style={{ fontSize: '0.88rem', color: 'var(--text-muted)' }}>
-            {authReasonMessage || (isLogin ? 'Log in to manage your experience bookings' : 'Join HobbyHub to discover and host experiences')}
+            {displayNotice}
           </p>
         </div>
 

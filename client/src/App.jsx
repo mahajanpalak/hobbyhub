@@ -35,7 +35,7 @@ export default function App() {
   const [bookings, setBookings] = useState([]);
 
   const openAuthModalWithMessage = (msg = '') => {
-    setAuthReasonMessage(msg);
+    setAuthReasonMessage(typeof msg === 'string' ? msg : '');
     setIsAuthModalOpen(true);
   };
 
@@ -150,7 +150,7 @@ export default function App() {
         activeTab={activeTab}
         setActiveTab={setActiveTab}
         onOpenHostModal={() => setIsHostModalOpen(true)}
-        onOpenAuthModal={openAuthModalWithMessage}
+        onOpenAuthModal={() => openAuthModalWithMessage('')}
         user={user}
         onLogout={handleLogout}
         bookingsCount={bookings.filter(b => b.status !== 'Cancelled').length}
