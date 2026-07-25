@@ -9,3 +9,5 @@ services:
         value: 20.10.0
       - key: MONGODB_URI
         sync: false # Set your MongoDB Atlas Connection String in Render Dashboard
+      - key: JWT_SECRET
+        generateValue: true # Render will automatically generate a secure random secret key
