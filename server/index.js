@@ -3,6 +3,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import path from 'path';
+import fs from 'fs';
 import { fileURLToPath } from 'url';
 import { MongoMemoryServer } from 'mongodb-memory-server';
 
@@ -38,19 +39,28 @@ app.get('/api/health', (req, res) => {
   });
 });
 
-// Serve frontend in production or if build dist exists
-const clientDistPath = path.join(__dirname, '../client/dist');
+// Robust Client Static File Resolution for Render & Local Production
+const potentialPaths = [
+  path.join(__dirname, '../client/dist'),
+  path.join(process.cwd(), 'client/dist'),
+  path.join(__dirname, 'client/dist')
+];
+
+let clientDistPath = potentialPaths.find(p => fs.existsSync(path.join(p, 'index.html'))) || potentialPaths[0];
+
+console.log(' Serving client static files from:', clientDistPath);
 app.use(express.static(clientDistPath));
 
 app.get('*', (req, res, next) => {
   if (req.path.startsWith('/api')) {
     return next();
   }
-  res.sendFile(path.join(clientDistPath, 'index.html'), (err) => {
-    if (err) {
-      res.send('HobbyHub Backend API is running. Build client using "npm run build".');
-    }
-  });
+  const indexPath = path.join(clientDistPath, 'index.html');
+  if (fs.existsSync(indexPath)) {
+    res.sendFile(indexPath);
+  } else {
+    res.status(404).send(`Client index.html not found. Building client... Path checked: ${indexPath}`);
+  }
 });
 
 // Connect Database & Start Server
