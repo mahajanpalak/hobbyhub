@@ -1,0 +1,248 @@
+:root {
+  /* Twisted Spot Color Palette */
+  --color-cyan: #00D7FF;
+  --color-terracotta: #7E2D00;
+  --color-cream: #FFE9CF;
+  --color-taupe: #917159;
+
+  /* Extended UI Tokens inspired by minimalist clean layout */
+  --bg-page: #FBF8F3;
+  --bg-card: #FFFFFF;
+  --bg-cream-soft: #FFF4E5;
+  --bg-cyan-light: #E6FAFF;
+  --text-main: #2A1F18;
+  --text-muted: #6B5B52;
+  --border-light: rgba(145, 113, 89, 0.15);
+  --border-strong: rgba(126, 45, 0, 0.25);
+  
+  --shadow-sm: 0 2px 8px rgba(126, 45, 0, 0.04);
+  --shadow-md: 0 10px 30px rgba(126, 45, 0, 0.06);
+  --shadow-lg: 0 20px 40px rgba(126, 45, 0, 0.1);
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-full: 9999px;
+
+  --font-heading: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-page);
+  color: var(--text-main);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  color: var(--color-terracotta);
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: var(--font-body);
+  cursor: pointer;
+  border: none;
+  outline: none;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Common Layout Containers */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Modern Card */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+  border-color: rgba(0, 215, 255, 0.4);
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border-radius: var(--radius-full);
+}
+
+.btn-primary {
+  background-color: var(--color-cyan);
+  color: #032530;
+  box-shadow: 0 4px 14px rgba(0, 215, 255, 0.35);
+}
+
+.btn-primary:hover {
+  background-color: #00c4ea;
+  transform: scale(1.02);
+  box-shadow: 0 6px 20px rgba(0, 215, 255, 0.45);
+}
+
+.btn-secondary {
+  background-color: var(--color-terracotta);
+  color: #FFFFFF;
+  box-shadow: 0 4px 14px rgba(126, 45, 0, 0.2);
+}
+
+.btn-secondary:hover {
+  background-color: #632300;
+  transform: scale(1.02);
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1.5px solid var(--color-terracotta);
+  color: var(--color-terracotta);
+}
+
+.btn-outline:hover {
+  background: var(--color-cream);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text-muted);
+}
+
+.btn-ghost:hover {
+  color: var(--color-terracotta);
+  background: rgba(255, 233, 207, 0.4);
+}
+
+/* Badges & Pills */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.badge-cyan {
+  background-color: var(--bg-cyan-light);
+  color: #00768C;
+  border: 1px solid rgba(0, 215, 255, 0.3);
+}
+
+.badge-cream {
+  background-color: var(--color-cream);
+  color: var(--color-terracotta);
+  border: 1px solid rgba(126, 45, 0, 0.15);
+}
+
+.badge-taupe {
+  background-color: #F3ECE6;
+  color: var(--color-taupe);
+}
+
+/* Modal Overlay */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(42, 31, 24, 0.5);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.modal-content {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  max-width: 850px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  animation: slideUp 0.25s ease-out;
+}
+
+/* Input Fields inspired by Brain's Light screenshot */
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-label {
+  display: block;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-main);
+  margin-bottom: 6px;
+}
+
+.form-input, .form-select, .form-textarea {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--border-light);
+  background-color: #FAF8F5;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--text-main);
+  transition: all 0.2s ease;
+}
+
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+  outline: none;
+  border-color: var(--color-cyan);
+  background-color: #FFFFFF;
+  box-shadow: 0 0 0 3px rgba(0, 215, 255, 0.2);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-page);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-taupe);
+  border-radius: 4px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}

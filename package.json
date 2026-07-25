@@ -1,0 +1,18 @@
+{
+  "name": "hobbyhub",
+  "version": "1.0.0",
+  "description": "Experience Booking Platform built with MERN Stack",
+  "main": "server/index.js",
+  "type": "module",
+  "scripts": {
+    "postinstall": "npm install --prefix server && npm install --prefix client",
+    "build": "npm run build --prefix client",
+    "start": "node server/index.js",
+    "dev:server": "npm run dev --prefix server",
+    "dev:client": "npm run dev --prefix client",
+    "seed": "npm run seed --prefix server"
+  },
+  "keywords": ["mern", "experience-booking", "pottery", "dance", "workshops", "render"],
+  "author": "Antigravity",
+  "license": "ISC"
+}
