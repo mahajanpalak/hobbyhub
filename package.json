@@ -7,7 +7,7 @@
   "scripts": {
     "postinstall": "npm install --prefix server && npm install --prefix client",
     "build": "npm install --prefix client && npm run build --prefix client && npm install --prefix server",
-    "start": "node server/index.js",
+    "start": "node -e \"import('fs').then(fs => { if (!fs.existsSync('./dist/index.html') && !fs.existsSync('./client/dist/index.html')) { console.log('Building client before launch...'); import('child_process').then(cp => cp.execSync('npm run build', {stdio: 'inherit'})); } });\" && node server/index.js",
     "dev:server": "npm run dev --prefix server",
     "dev:client": "npm run dev --prefix client",
     "seed": "npm run seed --prefix server"

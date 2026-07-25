@@ -39,11 +39,12 @@ app.get('/api/health', (req, res) => {
   });
 });
 
-// Robust Client Static File Resolution for Render & Local Production
+// Robust Client Static File Resolution
 const potentialPaths = [
+  path.join(__dirname, '../dist'),
+  path.join(process.cwd(), 'dist'),
   path.join(__dirname, '../client/dist'),
-  path.join(process.cwd(), 'client/dist'),
-  path.join(__dirname, 'client/dist')
+  path.join(process.cwd(), 'client/dist')
 ];
 
 let clientDistPath = potentialPaths.find(p => fs.existsSync(path.join(p, 'index.html'))) || potentialPaths[0];
@@ -59,7 +60,13 @@ app.get('*', (req, res, next) => {
   if (fs.existsSync(indexPath)) {
     res.sendFile(indexPath);
   } else {
-    res.status(404).send(`Client index.html not found. Building client... Path checked: ${indexPath}`);
+    // Try to find index.html in any of the potential paths
+    const foundPath = potentialPaths.map(p => path.join(p, 'index.html')).find(p => fs.existsSync(p));
+    if (foundPath) {
+      res.sendFile(foundPath);
+    } else {
+      res.status(404).send(`Client index.html not found. Checked: ${indexPath}`);
+    }
   }
 });
 
